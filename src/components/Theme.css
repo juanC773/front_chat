@@ -1,0 +1,29 @@
+/* Theme.css */
+
+/* Estilos para el modo claro */
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+/* Estilos para el modo oscuro */
+.dark-mode {
+    background-color: #121212; /* Fondo oscuro */
+    color: white; /* Texto claro */
+}
+
+/* Estilo para el botón de modo oscuro */
+.toggle-button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF; /* Color del botón */
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #0056b3; /* Color del botón al pasar el ratón */
+}

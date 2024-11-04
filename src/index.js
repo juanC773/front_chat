@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Chat from './components/Chat';
+
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import { routes } from './router/Router';
-
+import { ThemeProvider } from './components/ThemeContext';
+import './components/Theme.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={routes}/>
+    <ThemeProvider> {/* Envuelve la app para el modo oscuro*/}
+      <RouterProvider router={routes} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
