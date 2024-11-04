@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function Authenticator() {
     return (
@@ -6,7 +7,12 @@ export default function Authenticator() {
             <h1>Es mi header</h1>
             <div style={{display:'flex', flexDirection: 'row'}}>
                 <button>Inicio</button>
-                <button>Registro</button>
+                <Link to="/register">
+                <button>
+                    Registrarse
+                </button>
+            </Link>
+                
                 <button>Chat</button>
             </div>
             <Outlet/>

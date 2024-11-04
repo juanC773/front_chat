@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import stompService from "../utils/socketService";
+import "./Chat.css"; 
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
@@ -72,7 +73,6 @@ const Chat = () => {
             });
 
             if (response.ok) {
-                
                 setMessages(prev => [...prev, messageData]);
                 setNewMessage('');
                 scrollToBottom();
@@ -85,8 +85,8 @@ const Chat = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen max-w-2xl mx-auto p-4">
-            <div className="mb-4">
+        <div className="chat-container">
+            <div className="chat-header">
                 <input
                     type="text"
                     value={to}
@@ -95,40 +95,37 @@ const Chat = () => {
                         fetchExistingMessages();
                     }}
                     placeholder="Destinatario"
-                    className="w-full p-2 border rounded mb-2"
+                    className="recipient-input"
                 />
             </div>
 
-            <div className="flex-1 overflow-y-auto border rounded p-4 mb-4">
+            <div className="messages-container">
                 {messages.map((msg, index) => (
                     <div
                         key={index}
-                        className={`mb-2 p-2 rounded-lg max-w-[70%] ${
-                            msg.sender === sender 
-                                ? 'ml-auto bg-blue-500 text-white' 
-                                : 'bg-gray-200'
-                        }`}
+                        className={`message-bubble ${msg.sender === sender ? 'sent' : 'received'}`}
                     >
-                        <p className="text-sm font-semibold">{msg.sender}</p>
-                        <p>{msg.content}</p>
+                        <p className="message-sender">{msg.sender}</p>
+                        <p className="message-content">{msg.content}</p>
+                        <p className="message-time">{new Date(msg.time).toLocaleTimeString()}</p>
                     </div>
                 ))}
                 <div ref={messagesEndRef} />
             </div>
 
-            <div className="flex gap-2">
+            <div className="input-container">
                 <input
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                     placeholder="Escribe tu mensaje"
-                    className="flex-1 p-2 border rounded"
+                    className="message-input"
                 />
                 <button
                     onClick={sendMessage}
                     disabled={!to || !sender || !newMessage}
-                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                    className="send-button"
                 >
                     Enviar
                 </button>
